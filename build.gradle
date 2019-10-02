@@ -1,0 +1,32 @@
+plugins {
+    id "java"
+    id "maven"
+    id "jacoco"
+    id "org.sonarqube" version "2.7.1"
+}
+
+allprojects {
+    apply plugin: 'idea'
+}
+
+subprojects {
+
+    group = 'com.juanpabloprado'
+
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    if (project.hasProperty('useMavenLocal')) {
+        repositories {
+            mavenLocal()
+        }
+    }
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+}
+
+apply from: "gradle/sonar.gradle"
